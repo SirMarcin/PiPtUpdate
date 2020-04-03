@@ -14,7 +14,6 @@ using OSIsoft.AF.PI;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
-using System.Linq;
 
 
 
@@ -26,6 +25,14 @@ namespace UpdatePiPoints2
     {
         static void Main(string[] args)
         {
+            string today = DateTime.Now.ToString("dd_MM_yyyy");
+            string fileName = "C:\\Users\\cbuczynm\\Maintanance AF i ARC\\LogiZAktualizacjiPIPoints\\updatePiLog_" + today + ".txt";
+            FileStream filestream = new FileStream(fileName, FileMode.Create);
+            var streamwriter = new StreamWriter(filestream);
+            streamwriter.AutoFlush = true;
+            Console.SetOut(streamwriter);
+            Console.SetError(streamwriter);
+
             #region PiConnection
             PIServers piServers = new PIServers();
             PIServer piServer = piServers["cp-pisrv1"];
@@ -278,7 +285,7 @@ namespace UpdatePiPoints2
 
             #endregion
 
-            #region Kodowanie RDS PP Ciepłomierzy
+            #region Kodowanie nowych RDS PP Ciepłomierzy
 
             foreach (var point in listOfLatestPoints)
             {
@@ -314,6 +321,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.LicznikEnergii);
+                    }
 
                     if (listOfVectorMeters.Contains(meter.LicznikObjetosciPrzeplywu))
                     {
@@ -342,6 +353,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.LicznikObjetosciPrzeplywu);
                     }
 
                     if (listOfVectorMeters.Contains(meter.MocChwilowa))
@@ -372,6 +387,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.MocChwilowa);
+                    }
 
                     if (listOfVectorMeters.Contains(meter.PrzeplywChwilowy))
                     {
@@ -400,6 +419,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.PrzeplywChwilowy);
                     }
 
                     if (listOfVectorMeters.Contains(meter.TemperaturaZasilania))
@@ -430,6 +453,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.TemperaturaZasilania);
+                    }
 
                     if (listOfVectorMeters.Contains(meter.TemperaturaPowrotu))
                     {
@@ -458,6 +485,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.TemperaturaPowrotu);
                     }
 
                     if (listOfVectorMeters.Contains(meter.NumerFabryczny))
@@ -488,6 +519,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.NumerFabryczny);
+                    }
 
                     if (listOfVectorMeters.Contains(meter.KodBledu))
                     {
@@ -516,6 +551,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.KodBledu);
                     }
 
                     if (listOfVectorMeters.Contains(meter.GodzinyPracy))
@@ -546,6 +585,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + meter.GodzinyPracy);
+                    }
 
                 }
                 else
@@ -559,7 +602,7 @@ namespace UpdatePiPoints2
 
             #endregion
 
-            #region Kodowanie RDS PP Wodomierzy
+            #region Kodowanie nowych RDS PP Wodomierzy
 
             //WWU_1
             foreach (var point in listOfLatestPoints)
@@ -595,6 +638,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + WWU_1.StanWodomierza);
                     }
                 }
                 else
@@ -639,6 +686,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + WWU_2.StanWodomierza);
+                    }
                 }
                 else
                 {
@@ -681,6 +732,10 @@ namespace UpdatePiPoints2
                             myPIPoint.SaveAttributes();
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + WCW.StanWodomierza);
                     }
                 }
                 else
@@ -725,6 +780,10 @@ namespace UpdatePiPoints2
                             Console.WriteLine("utworzono {0}", myPIPoint.Name);
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("NIE MA W VECTORZE! - " + point.UPW_Kombit + " - " + point.adres_wf + " - kod : " + WCO.StanWodomierza);
+                    }
                 }
                 else
                 {
@@ -736,6 +795,7 @@ namespace UpdatePiPoints2
             #endregion
 
             Console.WriteLine("Zakończono aktualizowanie tagów PI na podstawie referencji z GIS");
+
         }
 
 
