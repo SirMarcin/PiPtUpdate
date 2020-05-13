@@ -25,6 +25,7 @@ namespace UpdatePiPoints2
     {
         static void Main(string[] args)
         {
+            #region Logowanie
             string today = DateTime.Now.ToString("dd_MM_yyyy");
             string fileName = "C:\\Users\\cbuczynm\\Maintanance AF i ARC\\LogiZAktualizacjiPIPoints\\updatePiLog_" + today + ".txt";
             FileStream filestream = new FileStream(fileName, FileMode.Create);
@@ -32,6 +33,7 @@ namespace UpdatePiPoints2
             streamwriter.AutoFlush = true;
             Console.SetOut(streamwriter);
             Console.SetError(streamwriter);
+            #endregion
 
             #region PiConnection
             PIServers piServers = new PIServers();
@@ -43,7 +45,7 @@ namespace UpdatePiPoints2
             #region Ładowanie najnowszego i poprzedniego pliku interfejsu GIS
             var files = new DirectoryInfo("X:\\GIS_LOD_1\\archiwum\\vector").GetFiles("cieplo_wodo_rds_*.txt");
             //var files = new DirectoryInfo("C:\\Users\\cbuczynm\\Desktop").GetFiles("cieplo_wodo_rds_*.txt");
-
+            Console.WriteLine("tusięwykładam");
             string latestFile = "";
             DateTime lastUpdated = DateTime.MinValue;
             foreach (var file in files)
